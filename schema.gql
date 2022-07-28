@@ -15,6 +15,7 @@ type Mutation {
 
 type Query {
   getAllContacts: [Contact!]!
+  getContactsByEmail(email: String!): Contact!
 }
 
 input newContactInput {

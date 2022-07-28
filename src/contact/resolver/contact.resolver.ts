@@ -12,6 +12,11 @@ export class ContactResolver {
         return this.contactService.getAllContacts();
     }
 
+    @Query(() => Contact)
+    async getContactsByEmail(@Arg('email') email: string) {
+        return this.contactService.getAllContactsByEmail(email);
+    }
+
     @Mutation(() => Contact)
     async newContact(@Arg('input') input: newContactInput) {
         let contact 
@@ -26,12 +31,7 @@ export class ContactResolver {
               error: e.message
             };
         }
-        return {
-            status: 'success',
-            message: 'Contact saved successfully',
-            data: contact,
-            error: null
-        }
+        return contact
     }
 
 }

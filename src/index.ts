@@ -12,7 +12,7 @@ import {
 } from 'apollo-server-core';
 import log from './utils/logger';
 import { connectToMongoDb } from './utils/mongo';
-import { ContactResolver } from './contact/resolver/contact.resolve';
+import { ContactResolver } from './contact/resolver/contact.resolver';
 
 dotenv.config();
 const main = async () => {
@@ -54,7 +54,6 @@ const main = async () => {
     log.info(`Server started on port http://localhost:${PORT}`);
   });
 
-  console.log(DB);
   connectToMongoDb(DB);
 };
 
