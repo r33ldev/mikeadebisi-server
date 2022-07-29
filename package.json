@@ -22,6 +22,7 @@
     "@typegoose/typegoose": "^9.11.0",
     "apollo-server": "^3.10.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.4",
     "dotenv": "^16.0.1",
     "graphql": "^15.3.0",
