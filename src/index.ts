@@ -1,6 +1,5 @@
 import { Context } from './types/context';
 import 'reflect-metadata';
-import config from 'config';
 import dotenv from 'dotenv';
 import express from 'express';
 import cookieParser from 'cookie-parser';
@@ -16,10 +15,9 @@ import { ContactResolver } from './contact/resolver/contact.resolver';
 
 dotenv.config();
 const main = async () => {
-  const DB = config
-    .get<string>('dbUri')
-    .replace('<PASSWORD>', process.env.DB_PASSWORD as string);
-  const PORT = config.get<number>('port');
+  const string = process.env.MONGO_CONNECTION_STRING as string;
+  const DB = string.replace('<PASSWORD>', process.env.DB_PASSWORD as string);
+  const PORT = process.env.PORT
 
   const schema = await buildSchema({
     resolvers: [ContactResolver],
@@ -30,7 +28,7 @@ const main = async () => {
   const app = express();
 
   app.use(express.json());
-  app.use(cookieParser());
+  app.use(cookieParser()); 
   app.set('trust proxy', 1);
 
   const server = new ApolloServer({
