@@ -5,14 +5,11 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-import {
-  ApolloServerPluginLandingPageProductionDefault,
-  ApolloServerPluginLandingPageGraphQLPlayground,
-} from 'apollo-server-core';
+import morgan from 'morgan';
 import log from './utils/logger';
 import { connectToMongoDb } from './utils/mongo';
 import { ContactResolver } from './contact/resolver/contact.resolver';
-import cors from 'cors'
+import cors from 'cors';
 
 dotenv.config();
 const main = async () => {
@@ -59,6 +56,8 @@ const main = async () => {
   // protecting our api from unauthorized origins
   app.use(cors(corsOptions));
 
+  app.use(morgan('combined'));
+
   // initializing session and httpOnly cookies
   if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1);
@@ -67,11 +66,12 @@ const main = async () => {
   const server = new ApolloServer({
     schema,
     context: (ctx: Context) => ctx,
-    plugins: [
-      process.env.NODE_ENV === 'production'
-        ? ApolloServerPluginLandingPageProductionDefault()
-        : ApolloServerPluginLandingPageGraphQLPlayground(),
-    ],
+    cache: 'bounded',
+    // plugins: [
+    //   process.env.NODE_ENV === 'production'
+    //     ? ApolloServerPluginLandingPageProductionDefault()
+    //     : ApolloServerPluginLandingPageGraphQLPlayground(),
+    // ],
   });
 
   await server.start();
