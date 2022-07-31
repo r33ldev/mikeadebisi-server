@@ -27,6 +27,7 @@ const main = async () => {
     process.env.CLIENT_URL,
     process.env.ORIGIN_SERVER,
     process.env.RDC_CLIENT_URL,
+    'http://localhost:3000',
   ];
 
   const corsOptions = {
