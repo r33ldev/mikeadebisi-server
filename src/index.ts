@@ -20,7 +20,7 @@ const main = async () => {
   const schema = await buildSchema({
     resolvers: [ContactResolver],
     emitSchemaFile: true,
-    validate: false,
+    validate: false, 
   });
 
   const whitelist = [
