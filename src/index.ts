@@ -20,14 +20,16 @@ const main = async () => {
   const schema = await buildSchema({
     resolvers: [ContactResolver],
     emitSchemaFile: true,
-    validate: false, 
+    validate: false,
   });
 
   const whitelist = [
-    process.env.CLIENT_URL,
-    process.env.ORIGIN_SERVER,
-    process.env.RDC_CLIENT_URL,
-    'http://localhost:3000',
+    process.env.HOMEPAGE_URL,
+    process.env.HOMEPAGE_PREVIEW_URL,
+    process.env.PORTFOLIO_URL,
+    process.env.PORTFOLIO_PREVIEW_URL,
+    process.env.SERVER_URL,
+    process.env.LOCALHOST_URL,
   ];
 
   const corsOptions = {
